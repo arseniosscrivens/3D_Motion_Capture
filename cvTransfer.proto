@@ -1,0 +1,29 @@
+syntax = "proto2";
+
+package transferPoints;
+option csharp_namespace = "TransferPoints";
+
+//holds all points in vector format
+message AllPoints
+{
+	message xyzVector
+	{
+		required float x = 1;
+		required float y = 2;
+		required float z = 3;
+	}
+
+	repeated xyzVector vec = 1;
+}
+
+//service to send all points through grc
+service PointSender
+{
+	rpc GetPoints(dummyPoint) returns (AllPoints);
+	rpc SetPoints(AllPoints) returns (dummyPoint);
+}
+
+message dummyPoint
+{
+	optional int32 id = 1;
+}
